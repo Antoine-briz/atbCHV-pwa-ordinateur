@@ -2794,7 +2794,7 @@ function renderReinForm() {
       <!-- Colonne gauche : titre + formulaire -->
       <div class="intervention-main">
 
-        <h2 class="antibio-title">Adaptation posologique à la fonction rénale</h2>
+        <h2 class="antibio-title">Adaptation  à la fonction rénale</h2>
 
         <form id="formRein" class="form">
 
@@ -2984,7 +2984,7 @@ function renderModalitesForm() {
       <!-- Colonne gauche : titre + formulaire -->
       <div class="intervention-main">
 
-        <h2 class="antibio-title">Modalités d'administration des antibiotiques</h2>
+        <h2 class="antibio-title">Modalités d'administration</h2>
 
         <form id="formModa" class="form">
 
