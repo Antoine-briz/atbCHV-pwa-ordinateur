@@ -2140,21 +2140,6 @@ function renderProbaMenu() {
   </button>
 
   <button type="button" class="btn"
-    onclick="openSubPage(renderProbaMediastiniteForm, renderProbaMenu)">
-    Médiastinites post-opératoires
-  </button>
-
-  <button type="button" class="btn"
-    onclick="openSubPage(renderProbaScarpaForm, renderProbaMenu)">
-    Infections de Scarpa
-  </button>
-
-  <button type="button" class="btn"
-    onclick="openSubPage(renderProbaEndocarditeForm, renderProbaMenu)">
-    Endocardites infectieuses
-  </button>
-
-  <button type="button" class="btn"
     onclick="openSubPage(renderProbaIUForm, renderProbaMenu)">
     Infections urinaires
   </button>
@@ -2172,6 +2157,21 @@ function renderProbaMenu() {
   <button type="button" class="btn"
     onclick="openSubPage(renderProbaNeuroForm, renderProbaMenu)">
     Infections neuro-méningées
+  </button>
+
+ <button type="button" class="btn"
+    onclick="openSubPage(renderProbaEndocarditeForm, renderProbaMenu)">
+    Endocardites infectieuses
+  </button>
+
+ <button type="button" class="btn"
+    onclick="openSubPage(renderProbaMediastiniteForm, renderProbaMenu)">
+    Médiastinites post-opératoires
+  </button>
+
+  <button type="button" class="btn"
+    onclick="openSubPage(renderProbaScarpaForm, renderProbaMenu)">
+    Infections de Scarpa
   </button>
 
   <button type="button" class="btn"
