@@ -9114,3 +9114,20 @@ body .intervention-main h2 {
   width: 100% !important;
   margin: 0 0 20px 0 !important;
 }
+
+/* =========================
+   HEADER ("Protocoles SARIC")
+   ========================= */
+
+header,
+.app-header {
+  background: #050b10;
+  color: #f5f5f5;
+}
+
+/* 🔵 thème clair → remplacé par vert CHV clair */
+body.theme-light header,
+body.theme-light .app-header {
+  background: #8ED0C5; /* vert clair CHV */
+  color: #000000; /* texte noir */
+}
