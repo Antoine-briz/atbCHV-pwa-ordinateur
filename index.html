@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="stylesheet" href="styles.css?v=1.0.0">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" sizes="300x300">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="img-popup" class="img-popup" onclick="closePopup()">
+    <img id="popup-img" src="" alt="">
+  </div>
+
+  <header class="appbar app-header">
+  <!-- Colonne gauche -->
+  <div class="header-side header-left">
+    <div class="header-logo-left">
+      <img src="img/logocardio.png" alt="Institut de cardiologie">
+    </div>
+
+    <div class="header-search">
+      <input id="header-search" type="search" placeholder="Recherche..." autocomplete="off">
+    </div>
+  </div>
+
+  <!-- Centre -->
+  <div class="header-text">
+    <div class="header-title">Protocoles du SARIC</div>
+    <div class="header-subtitle">Groupe hospitalier Pitié-Salpêtrière</div>
+  </div>
+
+  <!-- Colonne droite -->
+  <div class="header-side header-right">
+    <!-- Le bouton “Accès rapide” sera injecté ici par ton JS (ou peut rester dans le header en absolute, mais idéalement ici) -->
+    <div class="header-logo-right">
+      <img src="img/logosaric.png" alt="SARIC">
+    </div>
+  </div>
+</header>
+
+
+  <main class="container">
+    <div id="app"></div>
+  </main>
+
+  <footer id="app-footer">
+    <div class="theme-switcher">
+      <span>Thème :</span>
+      <label>
+        <input type="radio" name="theme" id="theme-dark" value="dark">
+        Sombre
+      </label>
+      <label>
+        <input type="radio" name="theme" id="theme-light" value="light">
+        Clair
+      </label>
+    </div>
+
+    <button id="saricnews-logo"
+            class="footer-actus-btn"
+            type="button"
+            onclick="openActus()"
+            aria-label="Actualités">
+      <img src="img/saricnews.png" alt="SARIC News">
+    </button>
+
+    <div class="footer-actions">
+      <button id="back-button" class="back-btn">⮜ Retour</button>
+    </div>
+  </footer>
+
+<!-- Firebase SDK (Compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-check-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js"></script>
+
+<!-- ZIP client-side -->
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAQQBo6D3bsdvhpM4lmcKQgX9KxnyP1d0g",
+    authDomain: "protocoles-saric-91f94.firebaseapp.com",
+    projectId: "protocoles-saric-91f94",
+    storageBucket: "protocoles-saric-91f94.firebasestorage.app",
+    messagingSenderId: "229468365316",
+    appId: "1:229468365316:web:356d54110b1956d6494b51"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+  // ✅ App Check (reCAPTCHA v3) — ICI tu mets la *clé du site*
+  const appCheck = firebase.appCheck();
+  appCheck.activate("6LfFHkYsAAAAALd7HxwKx4m9s8iqZHFwgwJ7vlm8", true);
+
+  window.db = firebase.firestore();
+  window.storage = firebase.storage();
+
+  console.log("✅ Firebase OK – bucket =", firebase.app().options.storageBucket);
+  console.log("✅ AppCheck OK =", typeof firebase.appCheck);
+</script>
+
+<!-- Application -->
+<script src="./app.js?v=1.0.0"></script>
+
+
+  <!-- Service Worker -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("./sw.js", { scope: "./" })
+          .then(reg => console.log("✅ Service Worker enregistré :", reg.scope))
+          .catch(err => console.error("❌ Erreur Service Worker :", err));
+      });
+    }
+  </script>
+</body>
+</html>
