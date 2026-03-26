@@ -6625,10 +6625,11 @@ const sub = (menu, page) => () => {
 };
 
 const routes = {
-  // Accueil app -> Antibioprophylaxie
-  "#/": renderAntibioproForm,
+  // Accueil app -> menu Antibiothérapie
+  "#/": renderReanAntibiotherapieMenu,
+  "#/antibiotherapie": renderReanAntibiotherapieMenu,
 
-  // Antibioprophylaxie (alias compatibles)
+  // Antibioprophylaxie
   "#/antibioprophylaxie": renderAntibioproForm,
   "#/antibiopro": renderAntibioproForm,
   "#/anesthesie/antibiopro": renderAntibioproForm,
