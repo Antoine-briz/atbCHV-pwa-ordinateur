@@ -6965,6 +6965,9 @@ function ensureHeaderTitleClickableHome() {
 window.addEventListener("hashchange", navigate);
 
 window.addEventListener("load", async () => {
+ if (typeof initTheme === "function") {
+  initTheme();
+}
   if (typeof loadOverridesConfig === "function") {
     await loadOverridesConfig();
   }
