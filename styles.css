@@ -1783,6 +1783,21 @@ body[data-theme="light"] .appbar small {
 }
 
 /* ============================================================
+   HEADER — thème sombre (bleu foncé comme avant)
+   ============================================================ */
+
+body[data-theme="dark"] .appbar {
+  background: #0b1f3b;   /* bleu foncé */
+  border-bottom-color: #1e3a6d;
+}
+
+body[data-theme="dark"] .appbar,
+body[data-theme="dark"] .appbar h1,
+body[data-theme="dark"] .appbar small {
+  color: #f5f5f5;        /* texte clair */
+}
+
+/* ============================================================
    Mise en forme spécifique de l'encadré "Caractéristiques patient"
    ============================================================ */
 
