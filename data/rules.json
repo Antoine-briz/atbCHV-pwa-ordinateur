@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "meta": {
+    "title": "Antibiothérapie CHV",
+    "locale": "fr-FR"
+  },
+  "datasets": {
+    "probabiliste": {
+      "fields": 
+[
+  { "id": "infection", "label": "Type d'infection", "type": "select", "options": ["Pneumonie"] },
+  { "id": "origine", "label": "Origine", "type": "select", "options": ["Communautaire", "Nosocomiale"] },
+  { "id": "delai", "label": "Délai ATB/hospi (si nosocomiale)", "type": "select", "options": ["< 5 jours", "> 5 jours"] },
+  { "id": "inhal", "label": "Inhalation", "type": "bool" },
+  { "id": "immuno", "label": "Immunodéprimé", "type": "bool" },
+  { "id": "pseudo", "label": "Risque Pseudomonas", "type": "bool" },
+  { "id": "blse", "label": "Risque BLSE", "type": "bool" },
+  { "id": "sarm", "label": "Risque SARM", "type": "bool" },
+  { "id": "choc", "label": "Choc septique", "type": "bool" },
+  { "id": "allergie", "label": "Allergie sévère β-lactamines", "type": "bool" },
+  { "id": "necro", "label": "Pneumonie nécrosante", "type": "bool" }
+]
+
+      "tables": 
+[
+  {
+    "match": { "infection": "Pneumonie", "allergie": true, "origine": "Communautaire" },
+    "recommendation": "Lévofloxacine 500 mg x2/j IVL/PO{{add_if(pseudo, \" + Aztréonam 1 g x4/j IVL\")}}{{add_if_origin(necro, origine, \"\\nAjout Métronidazole 500 mg x3/j IVL/PO + Linézolide 600 mg x2/j IVL/PO\", \"\\nAjout Métronidazole 500 mg x3/j IVL/PO (+ discuter Linézolide 600 mg x2/j IVL)\")}}{{note_if_origin(sarm, origine, \"\\nAjout de Linézolide 600 mg x2/j IVL/PO (à discuter selon la gravité)\", \"\\nAjout de Linézolide 600 mg x2/j IVL/PO\")}}{{note_if_origin(choc, origine, \"\\n\\nChoc septique : pas d'ajout d'aminoside.\", \"\\n\\nChoc septique : ajouter Amikacine 25-30 mg/kg IVL sur 30 min.\")}}"
+  },
+  {
+    "match": { "infection": "Pneumonie", "allergie": true, "origine": "Nosocomiale" },
+    "recommendation": "Lévofloxacine 500 mg x2/j IVL/PO + Aztréonam 1 g x4/j IVL{{add_if_origin(necro, origine, \"\\nAjout Métronidazole 500 mg x3/j IVL/PO + Linézolide 600 mg x2/j IVL/PO\", \"\\nAjout Métronidazole 500 mg x3/j IVL/PO (+ discuter Linézolide 600 mg x2/j IVL)\")}}{{note_if_origin(sarm, origine, \"\\nAjout de Linézolide 600 mg x2/j IVL/PO (à discuter selon la gravité)\", \"\\nAjout de Linézolide 600 mg x2/j IVL/PO\")}}{{note_if_origin(choc, origine, \"\\n\\nChoc septique : pas d'ajout d'aminoside.\", \"\\n\\nChoc septique : ajouter Amikacine 25-30 mg/kg IVL sur 30 min.\")}}"
+  },
+
+  {
+    "match": { "infection": "Pneumonie", "blse": true, "origine": "Communautaire" },
+    "recommendation": "Méropénème 4–6 g/24h IVL + Spiramycine 3 MU x3/j IVL{{add_if_origin(necro, origine, \"\\nAjout Métronidazole 500 mg x3/j IVL/PO + Linézolide 600 mg x2/j IVL/PO\", \"\\nAjout Métronidazole 500 mg x3/j IVL/PO (+ discuter Linézolide 600 mg x2/j IVL)\")}}{{note_if_origin(sarm, origine, \"\\nAjout de Linézolide 600 mg x2/j IVL/PO (à discuter selon la gravité)\", \"\\nAjout de Linézolide 600 mg x2/j IVL/PO\")}}{{note_if_origin(choc, origine, \"\\n\\nChoc septique : pas d'ajout d'aminoside.\", \"\\n\\nChoc septique : ajouter Amikacine 25-30 mg/kg IVL sur 30 min.\")}}"
+  },
+  {
+    "match": { "infection": "Pneumonie", "blse": true, "origine": "Nosocomiale" },
+    "recommendation": "Méropénème 4–6 g/24h IVL{{add_if_origin(necro, origine, \"\\nAjout Métronidazole 500 mg x3/j IVL/PO + Linézolide 600 mg x2/j IVL/PO\", \"\\nAjout Métronidazole 500 mg x3/j IVL/PO (+ discuter Linézolide 600 mg x2/j IVL)\")}}{{note_if_origin(sarm, origine, \"\\nAjout de Linézolide 600 mg x2/j IVL/PO (à discuter selon la gravité)\", \"\\nAjout de Linézolide 600 mg x2/j IVL/PO\")}}{{note_if_origin(choc, origine, \"\\n\\nChoc septique : pas d'ajout d'aminoside.\", \"\\n\\nChoc septique : ajouter Amikacine 25-30 mg/kg IVL sur 30 min.\")}}"
+  },
+
+  {
+    "match": { "infection": "Pneumonie", "pseudo": true, "origine": "Communautaire" },
+    "recommendation": "Céfépime 1 g x4/j IVL ou Pipéracilline-tazobactam 4 g x4/j IVL\\n+ Spiramycine 3 MU x3/j IVL{{add_if_origin(necro, origine, \"\\nAjout Métronidazole 500 mg x3/j IVL/PO + Linézolide 600 mg x2/j IVL/PO\", \"\\nAjout Métronidazole 500 mg x3/j IVL/PO (+ discuter Linézolide 600 mg x2/j IVL)\")}}{{note_if_origin(sarm, origine, \"\\nAjout de Linézolide 600 mg x2/j IVL/PO (à discuter selon la gravité)\", \"\\nAjout de Linézolide 600 mg x2/j IVL/PO\")}}{{note_if_origin(choc, origine, \"\\n\\nChoc septique : pas d'ajout d'aminoside.\", \"\\n\\nChoc septique : ajouter Amikacine 25-30 mg/kg IVL sur 30 min.\")}}"
+  },
+  {
+    "match": { "infection": "Pneumonie", "pseudo": true, "origine": "Nosocomiale" },
+    "recommendation": "Céfépime 1 g x4/j IVL ou Pipéracilline-tazobactam 4 g x4/j IVL\\n(si pas d'ATBgramme antérieur){{add_if_origin(necro, origine, \"\\nAjout Métronidazole 500 mg x3/j IVL/PO + Linézolide 600 mg x2/j IVL/PO\", \"\\nAjout Métronidazole 500 mg x3/j IVL/PO (+ discuter Linézolide 600 mg x2/j IVL)\")}}{{note_if_origin(sarm, origine, \"\\nAjout de Linézolide 600 mg x2/j IVL/PO (à discuter selon la gravité)\", \"\\nAjout de Linézolide 600 mg x2/j IVL/PO\")}}{{note_if_origin(choc, origine, \"\\n\\nChoc septique : pas d'ajout d'aminoside.\", \"\\n\\nChoc septique : ajouter Amikacine 25-30 mg/kg IVL sur 30 min.\")}}"
+  },
+
+  {
+    "match": { "infection": "Pneumonie", "immuno": true, "origine": "Communautaire" },
+    "recommendation": "Céfépime 1 g x4/j IVL ou Pipéracilline-tazobactam 4 g x4/j IVL\\n+ Spiramycine 3 MU x3/j IVL{{add_if_origin(necro, origine, \"\\nAjout Métronidazole 500 mg x3/j IVL/PO + Linézolide 600 mg x2/j IVL/PO\", \"\\nAjout Métronidazole 500 mg x3/j IVL/PO (+ discuter Linézolide 600 mg x2/j IVL)\")}}{{note_if_origin(sarm, origine, \"\\nAjout de Linézolide 600 mg x2/j IVL/PO (à discuter selon la gravité)\", \"\\nAjout de Linézolide 600 mg x2/j IVL/PO\")}}{{note_if_origin(choc, origine, \"\\n\\nChoc septique : pas d'ajout d'aminoside.\", \"\\n\\nChoc septique : ajouter Amikacine 25-30 mg/kg IVL sur 30 min.\")}}"
+  },
+  {
+    "match": { "infection": "Pneumonie", "immuno": true, "origine": "Nosocomiale" },
+    "recommendation": "Céfépime 1 g x4/j IVL ou Pipéracilline-tazobactam 4 g x4/j IVL{{add_if_origin(necro, origine, \"\\nAjout Métronidazole 500 mg x3/j IVL/PO + Linézolide 600 mg x2/j IVL/PO\", \"\\nAjout Métronidazole 500 mg x3/j IVL/PO (+ discuter Linézolide 600 mg x2/j IVL)\")}}{{note_if_origin(sarm, origine, \"\\nAjout de Linézolide 600 mg x2/j IVL/PO (à discuter selon la gravité)\", \"\\nAjout de Linézolide 600 mg x2/j IVL/PO\")}}{{note_if_origin(choc, origine, \"\\n\\nChoc septique : pas d'ajout d'aminoside.\", \"\\n\\nChoc septique : ajouter Amikacine 25-30 mg/kg IVL sur 30 min.\")}}"
+  },
+
+  {
+    "match": { "infection": "Pneumonie", "inhal": true, "origine": "Communautaire" },
+    "recommendation": "Amoxicilline-acide clavulanique 1 g x3/j IVL{{add_if_origin(necro, origine, \"\\nAjout Métronidazole 500 mg x3/j IVL/PO + Linézolide 600 mg x2/j IVL/PO\", \"\\nAjout Métronidazole 500 mg x3/j IVL/PO (+ discuter Linézolide 600 mg x2/j IVL)\")}}{{note_if_origin(sarm, origine, \"\\nAjout de Linézolide 600 mg x2/j IVL/PO (à discuter selon la gravité)\", \"\\nAjout de Linézolide 600 mg x2/j IVL/PO\")}}{{note_if_origin(choc, origine, \"\\n\\nChoc septique : pas d'ajout d'aminoside.\", \"\\n\\nChoc septique : ajouter Amikacine 25-30 mg/kg IVL sur 30 min.\")}}"
+  },
+  {
+    "match": { "infection": "Pneumonie", "inhal": true, "origine": "Nosocomiale" },
+    "recommendation": "Amoxicilline-acide clavulanique 1 g x3/j IVL\\nou Pipéracilline-tazobactam 4 g x4/j IVL{{add_if_origin(necro, origine, \"\\nAjout Métronidazole 500 mg x3/j IVL/PO + Linézolide 600 mg x2/j IVL/PO\", \"\\nAjout Métronidazole 500 mg x3/j IVL/PO (+ discuter Linézolide 600 mg x2/j IVL)\")}}{{note_if_origin(sarm, origine, \"\\nAjout de Linézolide 600 mg x2/j IVL/PO (à discuter selon la gravité)\", \"\\nAjout de Linézolide 600 mg x2/j IVL/PO\")}}{{note_if_origin(choc, origine, \"\\n\\nChoc septique : pas d'ajout d'aminoside.\", \"\\n\\nChoc septique : ajouter Amikacine 25-30 mg/kg IVL sur 30 min.\")}}"
+  },
+
+  {
+    "match": { "infection": "Pneumonie", "origine": "Communautaire" },
+    "recommendation": "Céfotaxime 1 g x4–6/24h IVL + Spiramycine 3 MU x3/j IVL{{add_if_origin(necro, origine, \"\\nAjout Métronidazole 500 mg x3/j IVL/PO + Linézolide 600 mg x2/j IVL/PO\", \"\\nAjout Métronidazole 500 mg x3/j IVL/PO (+ discuter Linézolide 600 mg x2/j IVL)\")}}{{note_if_origin(sarm, origine, \"\\nAjout de Linézolide 600 mg x2/j IVL/PO (à discuter selon la gravité)\", \"\\nAjout de Linézolide 600 mg x2/j IVL/PO\")}}{{note_if_origin(choc, origine, \"\\n\\nChoc septique : pas d'ajout d'aminoside.\", \"\\n\\nChoc septique : ajouter Amikacine 25-30 mg/kg IVL sur 30 min.\")}}"
+  },
+  {
+    "match": { "infection": "Pneumonie", "origine": "Nosocomiale", "delai": "> 5 jours" },
+    "recommendation": "Céfépime 1 g x4/j IVL{{add_if_origin(necro, origine, \"\\nAjout Métronidazole 500 mg x3/j IVL/PO + Linézolide 600 mg x2/j IVL/PO\", \"\\nAjout Métronidazole 500 mg x3/j IVL/PO (+ discuter Linézolide 600 mg x2/j IVL)\")}}{{note_if_origin(sarm, origine, \"\\nAjout de Linézolide 600 mg x2/j IVL/PO (à discuter selon la gravité)\", \"\\nAjout de Linézolide 600 mg x2/j IVL/PO\")}}{{note_if_origin(choc, origine, \"\\n\\nChoc septique : pas d'ajout d'aminoside.\", \"\\n\\nChoc septique : ajouter Amikacine 25-30 mg/kg IVL sur 30 min.\")}}"
+  },
+  {
+    "match": { "infection": "Pneumonie", "origine": "Nosocomiale", "delai": "< 5 jours" },
+    "recommendation": "Céfotaxime 1 g x4–6/24h IVL{{add_if_origin(necro, origine, \"\\nAjout Métronidazole 500 mg x3/j IVL/PO + Linézolide 600 mg x2/j IVL/PO\", \"\\nAjout Métronidazole 500 mg x3/j IVL/PO (+ discuter Linézolide 600 mg x2/j IVL)\")}}{{note_if_origin(sarm, origine, \"\\nAjout de Linézolide 600 mg x2/j IVL/PO (à discuter selon la gravité)\", \"\\nAjout de Linézolide 600 mg x2/j IVL/PO\")}}{{note_if_origin(choc, origine, \"\\n\\nChoc septique : pas d'ajout d'aminoside.\", \"\\n\\nChoc septique : ajouter Amikacine 25-30 mg/kg IVL sur 30 min.\")}}"
+  }
+]
+
+
+
+
+
+    "durees": {
+      "fields": [
+        {
+          "id": "infection",
+          "label": "Type d'infection",
+          "type": "select",
+          "options": [
+            "Pneumonie communautaire",
+            "IVU non compliquée",
+            "Cellulite",
+            "Bactériémie à S. aureus"
+          ]
+        },
+        {
+          "id": "germe",
+          "label": "Germe",
+          "type": "select",
+          "options": [
+            "S. pneumoniae",
+            "E. coli",
+            "S. aureus sensible",
+            "S. aureus MRSA",
+            "P. aeruginosa"
+          ]
+        }
+      ],
+      "matrix": [
+        {
+          "infection": "Pneumonie communautaire",
+          "germe": "S. pneumoniae",
+          "duree": "5–7 j"
+        },
+        {
+          "infection": "IVU non compliquée",
+          "germe": "E. coli",
+          "duree": "1 j (fosfo) à 5 j"
+        },
+        {
+          "infection": "Cellulite",
+          "germe": "S. aureus sensible",
+          "duree": "5–7 j"
+        },
+        {
+          "infection": "Bactériémie à S. aureus",
+          "germe": "S. aureus sensible",
+          "duree": "≥14 j (selon foyer)"
+        },
+        {
+          "infection": "Bactériémie à S. aureus",
+          "germe": "S. aureus MRSA",
+          "duree": "≥14 j (selon foyer)"
+        }
+      ]
+    }
+  }
+}
