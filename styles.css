@@ -1772,14 +1772,14 @@ main.container {
    ============================================================ */
 
 body[data-theme="light"] .appbar {
-  background: #cfe3ff;   /* Bleu clair doux */
-  border-bottom-color: #a9c7f7;
+  background: #8ED0C5;   /* vert clair CHV */
+  border-bottom-color: #6fb8aa;
 }
 
 body[data-theme="light"] .appbar,
 body[data-theme="light"] .appbar h1,
 body[data-theme="light"] .appbar small {
-  color: #0b1f3b;         /* Texte bleu foncé lisible */
+  color: #000000;         /* Texte noir lisible */
 }
 
 /* ============================================================
