@@ -9100,16 +9100,16 @@ body:not(.light-theme) .cec-proto-page .cec-select option{
 }
 
 /* =========================================================
-   FORÇAGE TITRES INTERVENTION PAGE (priorité max)
+   TITRES INTERVENTION PAGE (version ajustée)
    ========================================================= */
 
 body .intervention-shell .hero h2,
 body .intervention-main .hero h2,
 body .intervention-shell h2,
 body .intervention-main h2 {
-  font-size: 7rem !important;
-  line-height: 1.1 !important;
+  font-size: 3rem !important;   /* ← taille réduite */
+  line-height: 1.2 !important;
   text-align: center !important;
   width: 100% !important;
-  margin: 0 0 24px 0 !important;
+  margin: 0 0 20px 0 !important;
 }
