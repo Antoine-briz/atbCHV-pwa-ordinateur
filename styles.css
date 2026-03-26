@@ -9107,7 +9107,7 @@ body .intervention-shell .hero h2,
 body .intervention-main .hero h2,
 body .intervention-shell h2,
 body .intervention-main h2 {
-  font-size: 3rem !important;   /* ← taille réduite */
+  font-size: 2rem !important;   /* ← taille réduite */
   line-height: 1.2 !important;
   text-align: center !important;
   width: 100% !important;
