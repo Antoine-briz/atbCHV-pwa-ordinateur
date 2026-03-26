@@ -148,26 +148,26 @@ if ("scrollRestoration" in history) {
 // ==========================
 const THEME_KEY = "theme"; // "dark" ou "light"
 
-// Applique le thème au <body> + synchronise les radios si elles existent
 function applyTheme(theme) {
   const isLight = theme === "light";
 
-  // Une seule classe pour le thème clair
+  // Compatibilité avec tout le CSS existant
   document.body.classList.toggle("theme-light", isLight);
+  document.body.classList.toggle("light-theme", isLight);
 
-  // Sauvegarde
-  localStorage.setItem(THEME_KEY, theme);
+  document.body.setAttribute("data-theme", isLight ? "light" : "dark");
 
-  // Synchronise les radios si présentes
+  localStorage.setItem(THEME_KEY, isLight ? "light" : "dark");
+
   const darkRadio = document.getElementById("theme-dark");
   const lightRadio = document.getElementById("theme-light");
+
   if (darkRadio && lightRadio) {
     darkRadio.checked = !isLight;
     lightRadio.checked = isLight;
   }
 }
 
-// Initialise le thème + branche les radios du footer
 function initTheme() {
   const saved = localStorage.getItem(THEME_KEY) || "dark";
   applyTheme(saved);
@@ -176,12 +176,12 @@ function initTheme() {
   const lightRadio = document.getElementById("theme-light");
 
   if (darkRadio && lightRadio) {
-    darkRadio.addEventListener("change", () => {
+    darkRadio.onchange = () => {
       if (darkRadio.checked) applyTheme("dark");
-    });
-    lightRadio.addEventListener("change", () => {
+    };
+    lightRadio.onchange = () => {
       if (lightRadio.checked) applyTheme("light");
-    });
+    };
   }
 }
 
