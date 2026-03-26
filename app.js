@@ -6908,17 +6908,6 @@ function ensureQuickAccessButton() {
   menu.id = "qa-menu";
   menu.className = "qa-menu";
   menu.innerHTML = `
-    <button type="button" class="qa-item" data-key="ttm">Gestion pré-op des traitements</button>
-    <button type="button" class="qa-item" data-key="eto_page">Coupes et mesures ETO</button>
-    <button type="button" class="qa-item" data-key="eto_standard">CR ETO standard</button>
-    <button type="button" class="qa-item" data-key="eto_aortique">CR ETO plastie aortique</button>
-    <button type="button" class="qa-item" data-key="eto_mitrale">CR ETO plastie mitrale</button>
-    <button type="button" class="qa-item" onclick="location.hash='#/cec-protocoles'">
-    Protocoles CEC
-  </button>
-  <button type="button" class="qa-item" onclick="location.hash='#/cec-urgences'">
-    Urgences CEC
-  </button>
   `;
 
   const closeMenu = () => menu.classList.remove("is-open");
