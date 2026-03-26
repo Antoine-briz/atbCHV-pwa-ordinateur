@@ -2128,10 +2128,7 @@ function renderProbaMenu() {
       <!-- Colonne gauche : titre + texte + boutons -->
       <div class="intervention-main">
 
-        ${h("card", `
-          <h2>Antibiothérapie probabiliste</h2>
-          <p>Sélectionnez le foyer infectieux :</p>
-        `)}
+       <h2 class="antibio-title">Antibiothérapie probabiliste</h2>
 
         ${h("grid cols-2", `
   <button type="button" class="btn"
@@ -2797,9 +2794,7 @@ function renderReinForm() {
       <!-- Colonne gauche : titre + formulaire -->
       <div class="intervention-main">
 
-        <div class="card">
-          <strong>Adaptation à la fonction rénale</strong>
-        </div>
+        <h2 class="antibio-title">Adaptation posologique à la fonction rénale</h2>
 
         <form id="formRein" class="form">
 
@@ -2989,9 +2984,7 @@ function renderModalitesForm() {
       <!-- Colonne gauche : titre + formulaire -->
       <div class="intervention-main">
 
-        <div class="card">
-          <strong>Modalités d’administration des antibiotiques</strong>
-        </div>
+        <h2 class="antibio-title">Modalités d'administration des antibiotiques</h2>
 
         <form id="formModa" class="form">
 
