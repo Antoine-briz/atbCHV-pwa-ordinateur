@@ -6969,134 +6969,31 @@ function ensureHeaderTitleClickableHome() {
 }
 
 
-// ---------- Actions
-function qaRunAction(key) {
-  // 1) Gestion pré-op des traitements => Anesthésie > Consultation > Gestion des traitements + ouvrir TTM
-  if (key === "ttm") {
-    __qaPending = { type: "ttm" };
 
-    if (typeof openSubPage === "function" &&
-        typeof renderAnesthConsultTraitements === "function" &&
-        typeof renderAnesthConsultations === "function") {
-      openSubPage(renderAnesthConsultTraitements, renderAnesthConsultations);
-      setTimeout(qaApplyPendingIfAny, 0);
-      return;
-    }
-
-    // fallback si jamais openSubPage n’existe pas
-    window.location.hash = "#/anesthesie/consultations";
-    return;
-  }
-
-  // 2) Page ETO (coupes/mesures) => Réanimation > ETO
-  if (key === "eto_page") {
-    __qaPending = null;
-    window.location.hash = "#/reanimation/eto";
-    return;
-  }
-
-  // 3) CR ETO standard => Anesthésie > Chirurgie cardiaque > Pontages coronaires > ouvrir CR
-  if (key === "eto_standard") {
-    __qaPending = { type: "eto", prefix: "pc", variant: "standard" };
-
-    if (typeof openSubPage === "function" &&
-        typeof renderInterventionPontages === "function" &&
-        typeof renderAnesthChirCecMenu === "function") {
-      openSubPage(renderInterventionPontages, renderAnesthChirCecMenu);
-      setTimeout(qaApplyPendingIfAny, 0);
-      return;
-    }
-
-    // fallback (moins fiable)
-    window.location.hash = "#/anesthesie/chir-cec";
-    return;
-  }
-
-  // 4) CR ETO plastie aortique => Anesthésie > Chirurgie cardiaque > RVA + choisir "plastie" > ouvrir CR
-  if (key === "eto_aortique") {
-    __qaPending = { type: "eto", prefix: "rva", variant: "plastie_aortique" };
-
-    if (typeof openSubPage === "function" &&
-        typeof renderInterventionRVA === "function" &&
-        typeof renderAnesthChirCecMenu === "function") {
-      openSubPage(renderInterventionRVA, renderAnesthChirCecMenu);
-      setTimeout(qaApplyPendingIfAny, 0);
-      return;
-    }
-
-    window.location.hash = "#/anesthesie/chir-cec";
-    return;
-  }
-
-  // 5) CR ETO plastie mitrale => Anesthésie > Chirurgie cardiaque > RVM + choisir "plastie" > ouvrir CR
-  if (key === "eto_mitrale") {
-    __qaPending = { type: "eto", prefix: "rvm", variant: "plastie_mitrale" };
-
-    if (typeof openSubPage === "function" &&
-        typeof renderInterventionRVM === "function" &&
-        typeof renderAnesthChirCecMenu === "function") {
-      openSubPage(renderInterventionRVM, renderAnesthChirCecMenu);
-      setTimeout(qaApplyPendingIfAny, 0);
-      return;
-    }
-
-    window.location.hash = "#/anesthesie/chir-cec";
-    return;
-  }
-}
-
-// ---------- À appeler après render (DOM prêt)
-function qaApplyPendingIfAny() {
-  if (!__qaPending) return;
-
-  // Ouvrir TTM directement
-  if (__qaPending.type === "ttm") {
-    if (typeof openTreatmentManager === "function") {
-      openTreatmentManager();
-      setTimeout(() => {
-        const left = document.getElementById("ttm-left");
-        if (left) left.focus();
-      }, 50);
-    }
-    __qaPending = null;
-    return;
-  }
-
-  // Ouvrir le CR ETO demandé
-  if (__qaPending.type === "eto") {
-    const { prefix, variant } = __qaPending;
-
-    // force le bon type (plasties) AVANT ouverture
-    if (prefix === "rva" && variant === "plastie_aortique") {
-      const sel = document.getElementById("rva-type");
-      if (sel) sel.value = "plastie";
-    }
-    if (prefix === "rvm" && variant === "plastie_mitrale") {
-      const sel = document.getElementById("rvm-type");
-      if (sel) sel.value = "plastie";
-    }
-
-    // ouvre la bonne modal ETO (ta logique interne choisit le bon HTML)
-    if (typeof openEtoFormModal === "function") {
-      openEtoFormModal(prefix);
-    }
-
-    __qaPending = null;
-    return;
-  }
-}
 
 
 window.addEventListener("hashchange", navigate);
 
 window.addEventListener("load", async () => {
-  await loadOverridesConfig();
-  ensureFooterEditButton();
-  blockNavigationWhileEditing();
-  ensureQuickAccessButton();       // ✅
-  initHeaderSearch();
+  if (typeof loadOverridesConfig === "function") {
+    await loadOverridesConfig();
+  }
+  if (typeof ensureFooterEditButton === "function") {
+    ensureFooterEditButton();
+  }
+  if (typeof blockNavigationWhileEditing === "function") {
+    blockNavigationWhileEditing();
+  }
+  if (typeof ensureQuickAccessButton === "function") {
+    ensureQuickAccessButton();
+  }
+  if (typeof initHeaderSearch === "function") {
+    initHeaderSearch();
+  }
+
   navigate();
 });
 
-initActusNoonReset();
-
+if (typeof initActusNoonReset === "function") {
+  initActusNoonReset();
+}
