@@ -9098,3 +9098,18 @@ body:not(.light-theme) .cec-proto-page .cec-select option{
   color: #7a0c0c !important;
   font-weight: 400 !important;
 }
+
+/* =========================================================
+   FORÇAGE TITRES INTERVENTION PAGE (priorité max)
+   ========================================================= */
+
+body .intervention-shell .hero h2,
+body .intervention-main .hero h2,
+body .intervention-shell h2,
+body .intervention-main h2 {
+  font-size: 7rem !important;
+  line-height: 1.1 !important;
+  text-align: center !important;
+  width: 100% !important;
+  margin: 0 0 24px 0 !important;
+}
