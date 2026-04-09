@@ -1,6 +1,6 @@
 {
-  "name": "Protocoles SARIC",
-  "short_name": "Protocoles SARIC",
+  "name": "Antibiothérapie CHV",
+  "short_name": "Antibiothérapie CHV",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
